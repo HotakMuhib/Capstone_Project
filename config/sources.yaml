@@ -1,0 +1,5 @@
+sales_csv:
+  type: csv
+  path: data/retail_store_sales.csv
+  delimiter: ","
+  has_header: true

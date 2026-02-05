@@ -1,0 +1,35 @@
+# this yaml file will contain required fields and constraints
+
+validation_rules:
+  required_fields:
+    - Transaction ID
+    - Customer ID
+    - Category
+    - Item
+    - Price Per Unit
+    - Quantity
+    - Total Spent
+    - Payment Method
+    - Location
+    - Transaction Date
+  
+  field_types:
+    Transaction ID: str
+    Customer ID: str
+    Category: str
+    Item: str
+    Price Per Unit: float
+    Quantity: int
+    Total Spent: float
+    Payment Method: str
+    Location: str
+    Transaction Date: str
+    Discount Applied: bool
+
+  constraints:
+    Quantity:
+      min: 1
+    Price Per Unit:
+      min: 0
+    Total Spent:
+      min: 0
