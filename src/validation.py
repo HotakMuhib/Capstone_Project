@@ -12,8 +12,8 @@ def validate(df):
     rejected = []
 
     # We could later add .yaml filepath as an argument to validate function so that it can validate by multiple schemas
-    file = open('./config/schema.yaml', 'r')
-    schema = yaml.safe_load(file)
+    with open('./config/schema.yaml', 'r') as file:
+        schema = yaml.safe_load(file)
 
     required_fields = schema['validation_rules']['required_fields']
     field_types = schema['validation_rules']['field_types']
@@ -74,5 +74,7 @@ def cast(var, type):
         float(var)
     elif type == 'bool':
         bool(var)
+    elif type == 'date':
+        pd.to_datetime(var)
     else:
         raise ValueError("Unexpected data type passed in")

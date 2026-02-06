@@ -23,7 +23,7 @@ validation_rules:
     Total Spent: float
     Payment Method: str
     Location: str
-    Transaction Date: str
+    Transaction Date: date
     Discount Applied: bool
 
   constraints:
