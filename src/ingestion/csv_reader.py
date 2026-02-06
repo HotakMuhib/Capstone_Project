@@ -9,8 +9,6 @@ def read_csv(filepath):
         return df
     except FileNotFoundError:
         raise FileNotFoundError("Wrong filepath or file does not exist")
-    # except Exception:
-    #     print("Something unintended happened when reading csv")
     
     except Exception as e:
         raise RuntimeError("something unintended happened when reading csv") from e
