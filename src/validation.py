@@ -15,6 +15,9 @@ def validate(df):
     file = open('./config/schema.yaml', 'r')
     schema = yaml.safe_load(file)
 
+    # with open('./config/schema.yaml', 'r') as file:
+    #     schema = yaml.safe_load(file)
+
     required_fields = schema['validation_rules']['required_fields']
     field_types = schema['validation_rules']['field_types']
     constraints = schema['validation_rules']['constraints']
@@ -67,12 +70,13 @@ def validate(df):
 
 def cast(var, type):
     if type == 'str':
-        str(var)
+        return str(var)
     elif type == 'int':
-        int(var)
+        return int(var)
     elif type == 'float':
-        float(var)
+        return float(var)
     elif type == 'bool':
-        bool(var)
+       return bool(var)
     else:
         raise ValueError("Unexpected data type passed in")
+    #return keyword added to return something. 
