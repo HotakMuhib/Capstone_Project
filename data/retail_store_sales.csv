@@ -12577,3 +12577,7 @@ TXN_2407494,CUST_23,Food,Item_9_FOOD,17.0,3.0,51.0,Cash,Online,2022-08-06,
 TXN_5167298,CUST_04,Furniture,Item_7_FUR,14.0,-3,84.0,Cash,Online,2023-12-30,True
 TXN_5167298,CUST_04,Furniture,Item_7_FUR,-14,6.0,84.0,Cash,Online,2023-12-30,True
 TXN_5167298,CUST_04,Furniture,Item_7_FUR,14.0,6.0,-84.0,Cash,Online,2023-12-30,True
+TXN_5167333,CUST_04,Furniture,Item_7_FUR,14.0,6.0,84.0,Cash,Online,12-30-2023,
+TXN_5167298,CUST_04,Furniture,Item_7_FUR,14.0,6.0,84.0,Cash,Online,13-30-2023,True
+TXN_5167298,CUST_04,Furniture,Item_7_FUR,14.0,6.0,84.0,Cash,Online,12-35-2023,True
+TXN_5167298,CUST_04,Furniture,Item_7_FUR,14.0,6.0,84.0,Cash,Online,nothing,True

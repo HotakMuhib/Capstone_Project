@@ -17,8 +17,10 @@
 
 # CURRENTLY, main.py WILL BE USED FOR TESTING EARLY CODE AND DOING SOME EXPLORATORY ANALYSIS ON THE DATA
 
+import pandas as pd
 from ingestion.csv_reader import read_csv
 from validation import validate
+from data_cleaning import clean_data
 
 # # Show some info on our dataset
 # chocolate_df = read_csv('.\data\Chocolate Sales.csv')
@@ -46,3 +48,7 @@ print(retail_df.isnull().sum()) # This data is dirty so we can clean it
 accepted, rejected = validate(retail_df)
 print(len(accepted))
 print(len(rejected))
+validated_df = pd.DataFrame(accepted)
+
+clean_df = clean_data(validated_df)
+print(clean_df)
