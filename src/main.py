@@ -37,7 +37,7 @@ validated_df = pd.DataFrame(accepted)
 clean_df = clean_data(validated_df)
 
 # ---------- DEDUPLICATE ----------
-deduped_df = deduplicate(clean_df)
+deduped_df, rejected_df = deduplicate(clean_df)
 
 print(deduped_df.info())
-# print(rejected_df.info())
+print(rejected_df.head())
