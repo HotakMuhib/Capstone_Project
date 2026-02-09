@@ -58,6 +58,7 @@ def validate(df):
 
         # Finally accept or reject the row
         if errors:
+            row['Error Info'] = errors[0]
             rejected.append(row)
             errors = []
         else:

@@ -32,12 +32,15 @@ print('Validation:')
 print('Accepted Rows:', len(accepted))
 print('Rejected Rows:', len(rejected))
 validated_df = pd.DataFrame(accepted)
+rejected_val = pd.DataFrame(rejected)
 
 # ---------- CLEAN ----------
 clean_df = clean_data(validated_df)
 
 # ---------- DEDUPLICATE ----------
-deduped_df, rejected_df = deduplicate(clean_df)
+deduped_df, rejected_dedup = deduplicate(clean_df)
+rejected_df = pd.concat([rejected_val, rejected_dedup])
 
 print(deduped_df.info())
-print(rejected_df.head())
+print(rejected_df.info())
+print(rejected_df['Error Info'].unique())
