@@ -22,19 +22,19 @@ import logging
 import os
 
 #Logging setup
-os.makedirs("logs", exist_ok=True)
+os.makedirs("logs", exist_ok=True) #create a log directory,
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(message)s",
-    handlers=[
+logging.basicConfig(             #configure logging outp
+    level=logging.INFO,          #log info, warning, error critical
+    format="%(asctime)s %(levelname)s %(message)s",  
+    handlers=[                  #where log goes
         logging.FileHandler("logs/ingestion.log"),
         logging.FileHandler("logs/error.log"),
-        logging.StreamHandler()
+        logging.StreamHandler()        #.  print log to the terminal while script runs
     ]
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)    #create or retrieve logger name after module
 
 
 # ---------- READ ----------
