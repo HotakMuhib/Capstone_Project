@@ -1,4 +1,3 @@
-
 # This is the pipeline driver
 # it will run all the necesssary files from here
 #
@@ -13,32 +12,11 @@
 # 
 # 
 #
-
-
-# CURRENTLY, main.py WILL BE USED FOR TESTING EARLY CODE AND DOING SOME EXPLORATORY ANALYSIS ON THE DATA
-
 import pandas as pd
 from ingestion.csv_reader import read_csv
 from validation import validate
 from data_cleaning import clean_data
 from deduplication import deduplicate
-
-# # Show some info on our dataset
-# chocolate_df = read_csv('.\data\Chocolate Sales.csv')
-# print(chocolate_df.info())
-# print(chocolate_df.head())
-# print(chocolate_df.isnull().sum()) # Print the number of Null values in each column
-# # this data is already clean
-
-# print('--------------------------------')
-
-# # Show some info on another potential dataset
-# chocolate2_df = read_csv('./data/chocolate_sales2.csv')
-# print(chocolate2_df.info())
-# print(chocolate2_df.head())
-# print(chocolate2_df.isnull().sum()) 
-
-# print('--------------------------------')
 
 
 
