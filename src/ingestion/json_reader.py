@@ -1,4 +1,8 @@
 # optional second reader file if we want to add .json file reading capabilities
+
+# Only responsible for reading from the raw data in the data/ directory 
+# this file will read .json files and put the data into a pandas dataframe
+
 import pandas as pd
 
 def read_json(filepath):

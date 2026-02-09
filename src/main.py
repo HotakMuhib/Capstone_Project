@@ -18,6 +18,23 @@ from validation import validate
 from data_cleaning import clean_data
 from deduplication import deduplicate
 
+import logging
+import os
+
+#Logging setup
+os.makedirs("logs", exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    handlers=[
+        logging.FileHandler("logs/ingestion.log"),
+        logging.FileHandler("logs/error.log"),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
 
 
 # ---------- READ ----------
@@ -25,6 +42,9 @@ retail_df = read_csv('./data/retail_store_sales.csv')
 print(retail_df.info())
 print(retail_df.head())
 print(retail_df.isnull().sum()) # This data is dirty so we can clean it
+
+logger.info("Null counts:\n%s", retail_df.isnull().sum())
+
 
 # ---------- VALIDATE ----------
 accepted, rejected = validate(retail_df)
@@ -34,12 +54,19 @@ print('Rejected Rows:', len(rejected))
 validated_df = pd.DataFrame(accepted)
 rejected_val = pd.DataFrame(rejected)
 
+logger.info("Accepted rows: %d", len(accepted))
+logger.warning("Rejected rows: %d", len(rejected))
+
+
 # ---------- CLEAN ----------
 clean_df = clean_data(validated_df)
+logger.info("Data cleaning completed")
 
 # ---------- DEDUPLICATE ----------
 deduped_df, rejected_dedup = deduplicate(clean_df)
 rejected_df = pd.concat([rejected_val, rejected_dedup])
+
+logger.info("Deduplication completed: %d final rows", len(deduped_df))
 
 print(deduped_df.info())
 print(rejected_df.info())

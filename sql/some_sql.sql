@@ -1,2 +1,3 @@
 -- May contain the SQL statements for CREATING the tables to initialize the database
 -- May add another file to this directory to DROP tables and dissolve the database if needed
+-- how many tables, normalize it
