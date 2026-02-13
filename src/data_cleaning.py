@@ -6,6 +6,7 @@
 
 import pandas as pd
 import yaml
+import re
 
 def clean_data(df):
     clean_df = df.copy()
@@ -14,11 +15,20 @@ def clean_data(df):
         schema = yaml.safe_load(file)
     
     field_types = schema['validation_rules']['field_types']
+    string_cleaning_formats = schema['string_cleaning_formats']
 
     for field, required_type in field_types.items():
-        # for string cols, strip leading and trailing whitespace
+        # for string cols, strip leading and trailing whitespace then use config rules
         if required_type == 'str':
-            clean_df[field] = df[field].str.strip()
+            df[field] = df[field].str.strip()
+            for key in string_cleaning_formats:
+                if field in string_cleaning_formats[key]['columns']:
+                    if key == 'title case':
+                        clean_df[field] = df[field].str.title()
+                    elif key == 'id_format':
+                        clean_df[field] = df[field].str.extract(str(string_cleaning_formats[key]['regex']))
+                    elif key == 'item_format':
+                        clean_df[field] = df[field].str.extract(str(string_cleaning_formats[key]['regex']))
         # for numeric cols, cast from string to numeric
         elif required_type == 'int' or required_type == 'float':
             clean_df[field] = pd.to_numeric(df[field])
