@@ -1,3 +1,4 @@
+Transaction ID,Customer ID,Category,Item,Price Per Unit,Quantity,Total Spent,Payment Method,Location,Transaction Date,Discount Applied
 TXN_3687567,CUST_20,Electric household essentials,Item_2_EHE,6.5,3.0,19.5,Digital Wallet,In-store,2022-04-02,True
 TXN_6125814,CUST_14,Milk Products,Item_11_MILK,20.0,4.0,80.0,Cash,In-store,2023-05-28,True
 TXN_4093697,CUST_12,Beverages,Item_18_BEV,30.5,7.0,213.5,Credit Card,Online,2022-02-06,True

@@ -29,12 +29,14 @@ os.makedirs("logs", exist_ok=True) #create a log directory,
 
 logging.basicConfig(             #configure logging outp
     level=logging.INFO,          #log info, warning, error critical
+    
     format="%(asctime)s %(levelname)s %(message)s",  
     handlers=[                  #where log goes
         logging.FileHandler("logs/ingestion.log"),
-        logging.FileHandler("logs/error.log"),
+        # logging.FileHandler("logs/error.log"),
         logging.StreamHandler()        #.  print log to the terminal while script runs
     ]
+    #delete the record after running main.py
 )
 
 logger = logging.getLogger(__name__)    #create or retrieve logger name after module
@@ -59,7 +61,6 @@ print(retail_df.isnull().sum()) # This data is dirty so we can clean it
 print(retail_df['Payment Method'].unique())
 print(retail_df['Location'].unique())
 
-logger.info("Null counts:\n%s", retail_df.isnull().sum())
 
 
 # ---------- VALIDATE ----------
@@ -70,8 +71,8 @@ print('Rejected Rows:', len(rejected))
 validated_df = pd.DataFrame(accepted)
 rejected_val = pd.DataFrame(rejected)
 
-logger.info("Accepted rows: %d", len(accepted))
-logger.warning("Rejected rows: %d", len(rejected))
+logger.info("Accepted rows from Validation: %d", len(accepted))
+logger.warning("Rejected rows from Validation: %d", len(rejected))
 
 
 # ---------- CLEAN ----------
@@ -83,6 +84,7 @@ deduped_df, rejected_dedup = deduplicate(clean_df)
 rejected_df = pd.concat([rejected_val, rejected_dedup])
 
 logger.info("Deduplication completed: %d final rows", len(deduped_df))
+logger.warning("Rejected rows from Deduplication: %d",len(rejected_df) - len(rejected))
 
 print(deduped_df.info())
 print(rejected_df.info())
