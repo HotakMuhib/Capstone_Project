@@ -56,6 +56,9 @@ print(retail_df.info())
 print(retail_df.head())
 print(retail_df.isnull().sum()) # This data is dirty so we can clean it
 
+print(retail_df['Payment Method'].unique())
+print(retail_df['Location'].unique())
+
 logger.info("Null counts:\n%s", retail_df.isnull().sum())
 
 
@@ -84,3 +87,5 @@ logger.info("Deduplication completed: %d final rows", len(deduped_df))
 print(deduped_df.info())
 print(rejected_df.info())
 print(rejected_df['Error Info'].unique())
+
+print(deduped_df.head())

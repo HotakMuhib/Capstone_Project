@@ -6,6 +6,7 @@
 
 import pandas as pd
 import yaml
+import re
 
 def validate(df):
     accepted = []
@@ -55,7 +56,12 @@ def validate(df):
             if 'min' in constraint_dict:
                 if val_in_row < constraint_dict['min']:
                     errors.append(f'Value in {field} is less than minimum: {constraint_dict["min"]}')
-
+            if 'like' in constraint_dict:
+                if not re.search(str(constraint_dict['like']), str(val_in_row)):
+                    errors.append(f'Value in {field} is not in an acceptable format')
+            if 'in' in constraint_dict:
+                if val_in_row.lower() not in constraint_dict['in']:
+                    errors.append(f'Value in {field} is not an acceptable predefined value')
         # Finally accept or reject the row
         if errors:
             row['Error Info'] = errors[0]

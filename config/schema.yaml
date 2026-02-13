@@ -33,6 +33,41 @@ validation_rules:
       min: 0
     Total Spent:
       min: 0
+    Transaction ID:
+      like: '[0-9]+$'
+    Customer ID:
+      like: '[0-9]+$'
+    Item:
+      like: '[0-9]+_[a-zA-Z]+$'
+    Payment Method:
+      in: 
+        - digital wallet 
+        - credit card 
+        - cash
+    Location:
+      in: 
+        - online
+        - in-store
   
   optional_defaults:
     Discount Applied: False
+
+string_cleaning_formats:
+  title case: 
+    columns:
+      - Payment Method
+      - Location
+      - Category
+  id_format: 
+    regex: '([0-9]+$)'
+    columns: 
+      - Transaction ID
+      - Customer ID
+  item_format: 
+    regex: '([0-9]+_[a-zA-Z]+$)'
+    columns: 
+      - Item
+
+
+
+
