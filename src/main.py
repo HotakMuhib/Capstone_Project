@@ -13,10 +13,13 @@
 # 
 #
 import pandas as pd
-from ingestion.csv_reader import read_csv
 from validation import validate
 from data_cleaning import clean_data
 from deduplication import deduplicate
+from ingestion.csv_json_reader import read_source
+
+from config_loader import load_yaml
+
 
 import logging
 import os
@@ -38,7 +41,17 @@ logger = logging.getLogger(__name__)    #create or retrieve logger name after mo
 
 
 # ---------- READ ----------
-retail_df = read_csv('./data/retail_store_sales.csv')
+# retail_df = read_csv('./data/retail_store_sales.csv') 
+
+# Load YAML
+sources = load_yaml("config/sources.yaml")
+
+# Select the source
+sales_config = sources["sales_csv"]
+
+# Read dynamically
+retail_df = read_source(sales_config) 
+
 print(retail_df.info())
 print(retail_df.head())
 print(retail_df.isnull().sum()) # This data is dirty so we can clean it

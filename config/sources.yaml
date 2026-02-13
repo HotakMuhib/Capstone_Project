@@ -1,5 +1,7 @@
 sales_csv:
   type: csv
-  path: data/retail_store_sales.csv
+  path:
+    - data/retail_store_sales.csv
+    - data/retail_store_sales2.csv
   delimiter: ","
   has_header: true

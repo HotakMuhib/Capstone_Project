@@ -74,9 +74,9 @@ def cast(var, type):
     elif type == 'float':
         return float(var)
     elif type == 'bool':
-        bool(var)
+        return bool(var)
     elif type == 'date':
-        pd.to_datetime(var)
+        return pd.to_datetime(var)
     else:
         raise ValueError("Unexpected data type passed in")
     #return keyword added to return something. 
