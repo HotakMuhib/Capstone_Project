@@ -36,7 +36,7 @@ logging.basicConfig(             #configure logging outp
         # logging.FileHandler("logs/error.log"),
         logging.StreamHandler()        #.  print log to the terminal while script runs
     ]
-    #delete the record after running main.py
+    #delete the record after running main.py (need to work on)
 )
 
 logger = logging.getLogger(__name__)    #create or retrieve logger name after module
