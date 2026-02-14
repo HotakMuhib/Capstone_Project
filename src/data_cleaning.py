@@ -6,7 +6,6 @@
 
 import pandas as pd
 import yaml
-import re
 
 def clean_data(df):
     clean_df = df.copy()
