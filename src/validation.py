@@ -70,7 +70,7 @@ def validate(df):
         else:
             accepted.append(row)
 
-    return accepted, rejected
+    return pd.DataFrame(accepted), pd.DataFrame(rejected)
 
 def cast(var, type):
     if type == 'str':

@@ -38,4 +38,8 @@ def clean_data(df):
         elif required_type == 'date':
             clean_df[field] = pd.to_datetime(df[field], format='mixed')
     
+    # Transaction ID and Customer ID should be convertible to numerics now
+    clean_df['Transaction ID'] = pd.to_numeric(clean_df['Transaction ID'])
+    clean_df['Customer ID'] = pd.to_numeric(clean_df['Customer ID'])
+    
     return clean_df
