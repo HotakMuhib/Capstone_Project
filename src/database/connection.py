@@ -15,6 +15,7 @@ def get_connection():
         database = os.getenv("DB_NAME"),
         user = os.getenv("USER"),
         password = os.getenv("PASSWORD"),
+        print("debug", user)
         #sslmode = os.getenv("SSLMODE"),
         #sslrootcert = os.getenv("SSLROOTCERT")
 
