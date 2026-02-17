@@ -92,6 +92,11 @@ print(rejected_df.info())
 
 logger.info("Pipeline has finished execution")
 
+
+#this part enhances your dataset with new features, finds correlations,
+# and visualizes key insights using charts — all in one place.
+
+
 #Analysis:
 
 from analysis.feature_engineering import add_features
