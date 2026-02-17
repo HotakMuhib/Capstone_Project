@@ -6,7 +6,7 @@ import pandas as pd
 
 def deduplicate(df):
     # hard coding unique identifiers for now
-    unique_identifiers = ['Customer ID', 'Item', 'Price Per Unit','Quantity', 'Payment Method', 'Location', 'Transaction Date']
+    unique_identifiers = ['Customer ID', 'Item', 'Price Per Unit', 'Quantity', 'Payment Method', 'Location', 'Transaction Date']
     
     # First drop duplicates based on Transaction ID
     deduped_id = df[~df.duplicated(subset=['Transaction ID'], keep='first')] # get df excluding duplicates
