@@ -1,15 +1,31 @@
 # # Create and close postgresql connection to our AWS database
 # # will allow loader.py to interact with the database
-# from sqlalchemy import create_engine
 
-# def get_engine(db_config):
-#     user = db_config["user"]
-#     password = db_config["password"]
-#     host = db_config["host"]
-#     port = db_config["port"]
-#     name = db_config["name"]
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.engine import Engine
+from dotenv import load_dotenv
 
-#     connection_string = f"postgresql://{user}:{password}@{host}:{port}/{name}"
+def get_connection():
+    load_dotenv()
+    conn = None
+    try:
+        host = os.getenv("HOST"),
+        port = os.getenv("PORT"),
+        database = os.getenv("DB_NAME"),
+        user = os.getenv("USER"),
+        password = os.getenv("PASSWORD"),
+        #sslmode = os.getenv("SSLMODE"),
+        #sslrootcert = os.getenv("SSLROOTCERT")
 
-#     engine = create_engine(connection_string)
-#     return engine
+        db_url_str = f'postgresql+psycopg2://{user[0]}:{password[0]}@{host[0]}:{port[0]}/{database[0]}'
+        engine = create_engine(db_url_str)
+        conn = engine.connect()
+        print("Successfully connected")
+
+    except Exception as e:
+        print(f"Database error: {e}")
+        raise
+
+    return conn
+    
