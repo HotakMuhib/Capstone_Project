@@ -42,26 +42,28 @@ def validate(df):
                 errors.append(f'Missing or null value in column: {required_field}')
 
         # Check that all fields match their expected data type
-        for field, required_type in field_types.items():
-            val_in_row = row[field]
-            try:
-                val_in_row = cast(val_in_row, required_type)
-            except Exception:
-                errors.append(f'Value in {field} is not type: {required_type}')
+        if not errors:
+            for field, required_type in field_types.items():
+                val_in_row = row[field]
+                try:
+                    val_in_row = cast(val_in_row, required_type)
+                except Exception:
+                    errors.append(f'Value in {field} is not type: {required_type}')
         
         # Check all constraints
         # Add another if statement to add more constraints 
-        for field, constraint_dict in constraints.items():
-            val_in_row = row[field]
-            if 'min' in constraint_dict:
-                if val_in_row < constraint_dict['min']:
-                    errors.append(f'Value in {field} is less than minimum: {constraint_dict["min"]}')
-            if 'like' in constraint_dict:
-                if not re.search(str(constraint_dict['like']), str(val_in_row)):
-                    errors.append(f'Value in {field} is not in an acceptable format')
-            if 'in' in constraint_dict:
-                if val_in_row.lower() not in constraint_dict['in']:
-                    errors.append(f'Value in {field} is not an acceptable predefined value')
+        if not errors:
+            for field, constraint_dict in constraints.items():
+                val_in_row = row[field]
+                if 'min' in constraint_dict:
+                    if val_in_row < constraint_dict['min']:
+                        errors.append(f'Value in {field} is less than minimum: {constraint_dict["min"]}')
+                if 'like' in constraint_dict:
+                    if not re.search(str(constraint_dict['like']), str(val_in_row)):
+                        errors.append(f'Value in {field} is not in an acceptable format')
+                if 'in' in constraint_dict:
+                    if val_in_row.lower() not in constraint_dict['in']:
+                        errors.append(f'Value in {field} is not an acceptable predefined value')
         # Finally accept or reject the row
         if errors:
             row['Error Info'] = errors[0]
