@@ -81,13 +81,36 @@ print(rejected_df.info())
 
 # -------------------- LOAD --------------------
 # with get_connection() as conn:
-#     #drop_tables(conn)
-#     #create_tables(conn)
-#     #load_accepted_records(deduped_df, conn)
-#     #load_rejected_records(rejected_df, conn)
-#     #conn.commit()
+#     drop_tables(conn)
+#     create_tables(conn)
+#     load_accepted_records(deduped_df, conn)
+#     load_rejected_records(rejected_df, conn)
+#     conn.commit()
 #     rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
 #     for row in rs:
 #         print(row)
 
 logger.info("Pipeline has finished execution")
+
+#Analysis:
+
+from analysis.feature_engineering import add_features
+from analysis.correlation import correlation_analysis
+from analysis.visualization import (
+    plot_monthly_sales,
+    plot_payment_method_distribution,
+    plot_weekend_vs_weekday_sales,
+    plot_top_items
+)
+
+# Add features
+feature_df = add_features(deduped_df)
+
+# Correlation
+corr_matrix = correlation_analysis(feature_df)
+
+# Visualizations
+plot_monthly_sales(feature_df)
+plot_payment_method_distribution(feature_df)
+plot_weekend_vs_weekday_sales(feature_df)
+plot_top_items(feature_df)

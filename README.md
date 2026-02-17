@@ -4,9 +4,8 @@ pyyaml
 sqlalchemy
 dotenv
 pytest
-
-
-
+seaborn
+matplotlib
 
 Data Ingestion subsystem - pt1
 
@@ -67,11 +66,13 @@ The Data Ingestion Subsystem will be considered complete when:
 - Use parameterized queries to prevent SQL injection.
 
 ###Possible DB options
+
 - Host on AWS (free): https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html
-	- Turn off autoscaling!!
+  - Turn off autoscaling!!
 - https://aiven.io/ (offers free PostgreSQL DB)
 - https://www.kamatera.com/services/postgresql/ (free for 30 days, but requires a credit card)
 - https://www.elephantsqldb.com/try-elephantsqldb (now only offers 7 day free trial)
 
 ###DataSet
+
 - https://data.gov/
