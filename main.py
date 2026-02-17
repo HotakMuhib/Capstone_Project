@@ -12,14 +12,14 @@ import pandas as pd
 import logging
 import os
 from sqlalchemy.sql import text
-from validation import validate
-from data_cleaning import clean_data
-from deduplication import deduplicate
-from ingestion.csv_json_reader import read_source
-from config_loader import load_yaml
-from database.connection import get_connection
-from database.init_db import create_tables, drop_tables
-from database.loader import load_accepted_records, load_rejected_records
+from src.validation import validate
+from src.data_cleaning import clean_data
+from src.deduplication import deduplicate
+from src.ingestion.csv_json_reader import read_source
+from src.config_loader import load_yaml
+from src.database.connection import get_connection
+from src.database.init_db import create_tables, drop_tables
+from src.database.loader import load_accepted_records, load_rejected_records
 
 # Logging setup
 os.makedirs("logs", exist_ok=True) # create a log directory,
@@ -80,14 +80,14 @@ print(deduped_df.head())
 print(rejected_df.info())
 
 # -------------------- LOAD --------------------
-# with get_connection() as conn:
-#     #drop_tables(conn)
-#     #create_tables(conn)
-#     #load_accepted_records(deduped_df, conn)
-#     #load_rejected_records(rejected_df, conn)
-#     #conn.commit()
-#     rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
-#     for row in rs:
-#         print(row)
+with get_connection() as conn:
+    #drop_tables(conn)
+    #create_tables(conn)
+    #load_accepted_records(deduped_df, conn)
+    #load_rejected_records(rejected_df, conn)
+    #conn.commit()
+    rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
+    for row in rs:
+        print(row)
 
 logger.info("Pipeline has finished execution")

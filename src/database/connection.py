@@ -7,7 +7,7 @@ from sqlalchemy.engine import Engine
 from dotenv import load_dotenv
 
 def get_connection():
-    load_dotenv()
+    load_dotenv(override=True)
     conn = None
     try:
         host = os.getenv("HOST"),

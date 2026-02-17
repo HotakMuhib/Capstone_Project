@@ -1,4 +1,4 @@
-from ingestion.csv_json_reader import read_source
+from src.ingestion.csv_json_reader import read_source
 import pandas as pd
 
 def test_read_csv(tmp_path):
@@ -17,6 +17,19 @@ def test_read_csv(tmp_path):
     assert len(df) == 1
     assert list(df.columns) == ["col1", "col2"]
 
+def test_read_json(tmp_path):
+    file = tmp_path / "test.json"
+    file.write_text('[{"col1": "a", "col2": "b"}]')
+
+    config = {
+        "type": "json",
+        "path": [str(file)]
+    }
+
+    df = read_source(config)
+
+    assert len(df) == 1
+    assert list(df.columns) == ["col1", "col2"]
 
 def test_invalid_source_type():
     config = {
