@@ -21,7 +21,6 @@ def get_connection():
         db_url_str = f'postgresql+psycopg2://{user[0]}:{password[0]}@{host[0]}:{port[0]}/{database[0]}'
         engine = create_engine(db_url_str)
         conn = engine.connect()
-        print("Successfully connected")
 
     except Exception as e:
         print(f"Database error: {e}")

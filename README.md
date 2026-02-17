@@ -1,3 +1,13 @@
+Current Dependencies:
+pandas
+pyyaml
+sqlalchemy
+dotenv
+pytest
+
+
+
+
 Data Ingestion subsystem - pt1
 
 # 5 Week Capstone
