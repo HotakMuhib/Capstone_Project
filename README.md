@@ -5,7 +5,6 @@ sqlalchemy
 psycopg2
 dotenv
 pytest-cov
-seaborn
 matplotlib
 
 Data Ingestion subsystem - pt1

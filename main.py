@@ -11,7 +11,6 @@
 import pandas as pd
 import logging
 import os
-from sqlalchemy.sql import text
 from src.validation import validate
 from src.data_cleaning import clean_data
 from src.deduplication import deduplicate
@@ -26,19 +25,14 @@ os.makedirs("logs", exist_ok=True) # create a log directory,
 
 logging.basicConfig(             # configure logging output
     level=logging.INFO,          # log info, warning, error critical
-    
     format="%(asctime)s %(levelname)s %(message)s",  
     handlers=[                  # where log goes
-        logging.FileHandler("logs/ingestion.log"),
-        # logging.FileHandler("logs/error.log"),
+        logging.FileHandler("logs/ingestion.log", mode="w"),
         logging.StreamHandler()        #  print log to the terminal while script runs
     ]
-    # delete the record after running main.py (need to work on)
 )
 
 logger = logging.getLogger(__name__)    # create or retrieve logger name after module
-
-
 
 ####################     BEGIN PIPELINE     ####################
 
@@ -80,42 +74,14 @@ print(deduped_df.head())
 rejected_df.info()
 
 # -------------------- LOAD --------------------
-# with get_connection() as conn:
-#     drop_tables(conn)
-#     create_tables(conn)
-#     load_accepted_records(deduped_df, conn)
-#     load_rejected_records(rejected_df, conn)
-#     conn.commit()
-#     rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
-#     for row in rs:
-#         print(row)
+with get_connection() as conn:
+    logger.info("Successfully connected to database")
+    drop_tables(conn)
+    create_tables(conn)
+    logger.info("Created tables in database. Ready for loading")
+    load_accepted_records(deduped_df, conn)
+    load_rejected_records(rejected_df, conn)
+    conn.commit()
+    logger.info("Loaded into database")
 
 logger.info("Pipeline has finished execution")
-
-
-#this part enhances your dataset with new features, finds correlations,
-# and visualizes key insights using charts — all in one place.
-
-
-#Analysis:
-
-# from src.analysis.feature_engineering import add_features
-# from src.analysis.correlation import correlation_analysis
-# from src.analysis.visualization import (
-#     plot_monthly_sales,
-#     plot_payment_method_distribution,
-#     plot_weekend_vs_weekday_sales,
-#     plot_top_items
-# )
-
-# # Add features
-# feature_df = add_features(deduped_df)
-
-# # Correlation
-# corr_matrix = correlation_analysis(feature_df)
-
-# # Visualizations
-# plot_monthly_sales(feature_df)
-# plot_payment_method_distribution(feature_df)
-# plot_weekend_vs_weekday_sales(feature_df)
-# plot_top_items(feature_df)

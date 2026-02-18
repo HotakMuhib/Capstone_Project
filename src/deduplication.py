@@ -1,7 +1,8 @@
 # Remove duplicates after cleaning
-# Why after cleaning? Since dirty data could mask true duplicates
-# We could delete duplicates based on Transaction ID 
-# and a combination of other cols that if another row has the same values in these cols, it is very likely a duplicate entry
+# Runs after cleaning since dirty data could mask true duplicates
+# Duplicates are either: 
+# duplicate Transaction ID, or a duplicate of a subset of 'unique identifiers'
+
 import pandas as pd
 
 def deduplicate(df):

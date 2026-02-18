@@ -1,6 +1,7 @@
-# # INSERT data into the tables in our database here
-# # Should use parameterized queries in Python
+# Functions for loading both the accepted and rejected records into the database
+# Uses pandas.to_sql for fast, batch uploads
 
+# Load the items table with only unique items, and the transactions table with the rest of the columns
 def load_accepted_records(df, conn):
     if df.empty:
         return
@@ -32,7 +33,7 @@ def load_accepted_records(df, conn):
     )
 
     # Insert transactions
-    df_transactions = df[['transaction_id', 'cust_id', 'quantity', 'total_spent', 'method', 'location', 'date', 'has_discount']]
+    df_transactions = df[['transaction_id', 'item_id', 'cust_id', 'quantity', 'total_spent', 'method', 'location', 'date', 'has_discount']]
     df_transactions.to_sql(
         name="transactions",
         con=conn,
@@ -41,6 +42,7 @@ def load_accepted_records(df, conn):
         method="multi"
     )
 
+# Load the rejected records
 def load_rejected_records(df, conn):
     if df.empty:
         return

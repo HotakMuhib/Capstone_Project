@@ -2,7 +2,8 @@
 # for each row, we want to determine if the data is usable
 #   - all required fields exist
 #   - all data types are what we expect them to be
-#   - anything else to make sure the data makes sense
+#   - any constraints specified in schema.yaml
+# also add an Error Info col for the rejected rows to store reason for rejection
 
 import pandas as pd
 import yaml
@@ -26,12 +27,6 @@ def validate(df):
         # If missing required columns, do not continue using this data
         raise Exception("File is missing required columns:", missing_cols)
     
-    # Log if there are any extra columns, but allow the data to pass
-    extra_cols = [col for col in df.columns if col not in required_fields]
-    if extra_cols:
-        # Have logger write warning
-        pass
-
     # Now checking each row
     for index, row in df.iterrows():
         errors = [] # put meaningful error messages in here
@@ -87,4 +82,3 @@ def cast(var, type):
         return pd.to_datetime(var)
     else:
         raise ValueError("Unexpected data type passed in")
-    #return keyword added to return something. 

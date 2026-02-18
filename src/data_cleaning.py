@@ -1,7 +1,8 @@
 # runs after validation
 # standardize data by
-#   - fill missing values with defaults for the rows that pass validation
 #   - format and normalize text
+#   - convert string numerics to np numerics
+#   - map booleans 
 #   - standardize date formats
 
 import pandas as pd

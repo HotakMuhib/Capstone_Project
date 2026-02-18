@@ -1,5 +1,5 @@
-# # Create and close postgresql connection to our AWS database
-# # will allow loader.py to interact with the database
+# Create connection to our AWS database
+# The code that calls this function is responsible for closing the database!!!
 
 import os
 from sqlalchemy import create_engine
@@ -15,7 +15,6 @@ def get_connection():
         database = os.getenv("DB_NAME"),
         user = os.getenv("USER"),
         password = os.getenv("PASSWORD"),
-        print("debug", user)
         #sslmode = os.getenv("SSLMODE"),
         #sslrootcert = os.getenv("SSLROOTCERT")
 

@@ -1,26 +1,21 @@
 #perform feature engineering on transaction data to prepare it for analysis
 #It adds new calculated columns, extracts time-based features, and computes customer lifetime value.
 
-# analysis/feature_engineering.py
-
 import pandas as pd
 
 def add_features(df):
 
     # Revenue feature
-    df["calculated_total"] = df["Quantity"] * df["Price Per Unit"]
-    df["price_difference"] = df["Total Spent"] - df["calculated_total"]
+    df["calculated_total"] = df["quantity"] * df["price"]
+    df["price_difference"] = df["total_spent"] - df["calculated_total"] # Potentially see discount amount to use with has_discount column
 
     # Convert date column
-    df["Transaction Date"] = pd.to_datetime(df["Transaction Date"])
+    df["date"] = pd.to_datetime(df["date"])
 
     # Time features
-    df["year"] = df["Transaction Date"].dt.year
-    df["month"] = df["Transaction Date"].dt.month
-    df["day_of_week"] = df["Transaction Date"].dt.day_name()
+    df["year"] = df["date"].dt.year
+    df["month"] = df["date"].dt.to_period('M')
+    df["day_of_week"] = df["date"].dt.day_name()
     df["is_weekend"] = df["day_of_week"].isin(["Saturday", "Sunday"])
-
-    # Customer lifetime value
-    df["lifetime_value"] = df.groupby("Customer ID")["Total Spent"].transform("sum")
 
     return df

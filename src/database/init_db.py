@@ -1,3 +1,6 @@
+# Contains functions for initializing the database (and resetting)
+# To be run first after establishing connection
+
 from sqlalchemy.sql import text
 
 def create_tables(conn):
