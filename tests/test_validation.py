@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 from src.validation import validate, cast
 import pandas as pd
 import pytest
@@ -228,3 +230,4 @@ def test_successful_validation():
     assert len(accepted) == 1
     assert len(rejected) == 0
 
+>>>>>>> f5a859e34d277bcac08c8d56894d2e2499cdd7bf
