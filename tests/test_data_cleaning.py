@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 def test_string_titlecase():
-    ### Test that cleaning properly capitalizes rows into title case
+    ### Test that cleaning properly capitalizes rows into title-case
     data = {"Transaction ID": ['TXN_6867343'],
             "Customer ID": ['CUST_12'],
             "Category": ['Patisserie'],

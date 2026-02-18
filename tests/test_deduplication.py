@@ -23,7 +23,7 @@ def test_deduplicate_transaction_id():
     assert rejected.iloc[0]['Error Info'] == "Duplicate primary key"
 
 def test_deduplicate_unique_identifiers():
-    ### Tests that deduplication rejects a second row that has an existing subset of values in the unique identifier columns
+    ### Tests that deduplication rejects a second row that has an existing subset of values in the unique identifiers
     data = {"Transaction ID": [6867343, 6867344],
             "Customer ID": [12, 12],
             "Category": ['Patisserie', 'Patisserie'],
