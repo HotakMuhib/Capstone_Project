@@ -1,4 +1,4 @@
-from config_loader import load_yaml
+from src.config_loader import load_yaml
 
 def test_load_yaml(tmp_path):
     file = tmp_path / "test.yaml"

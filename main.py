@@ -12,14 +12,14 @@ import pandas as pd
 import logging
 import os
 from sqlalchemy.sql import text
-from validation import validate
-from data_cleaning import clean_data
-from deduplication import deduplicate
-from ingestion.csv_json_reader import read_source
-from config_loader import load_yaml
-from database.connection import get_connection
-from database.init_db import create_tables, drop_tables
-from database.loader import load_accepted_records, load_rejected_records
+from src.validation import validate
+from src.data_cleaning import clean_data
+from src.deduplication import deduplicate
+from src.ingestion.csv_json_reader import read_source
+from src.config_loader import load_yaml
+from src.database.connection import get_connection
+from src.database.init_db import create_tables, drop_tables
+from src.database.loader import load_accepted_records, load_rejected_records
 
 # Logging setup
 os.makedirs("logs", exist_ok=True) # create a log directory,
@@ -77,9 +77,10 @@ print(deduped_df.info())
 print(rejected_df['Error Info'].unique())
 
 print(deduped_df.head())
-print(rejected_df.info())
+rejected_df.info()
 
 # -------------------- LOAD --------------------
+<<<<<<< HEAD:src/main.py
 with get_connection() as conn:
     drop_tables(conn)
     create_tables(conn)
@@ -89,6 +90,17 @@ with get_connection() as conn:
     rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
     for row in rs:
         print(row)
+=======
+# with get_connection() as conn:
+#     drop_tables(conn)
+#     create_tables(conn)
+#     load_accepted_records(deduped_df, conn)
+#     load_rejected_records(rejected_df, conn)
+#     conn.commit()
+#     rs = conn.execute(text("SELECT date FROM transactions"))
+#     for row in rs:
+#         print(row)
+>>>>>>> f5a859e34d277bcac08c8d56894d2e2499cdd7bf:main.py
 
 logger.info("Pipeline has finished execution")
 
@@ -99,23 +111,23 @@ logger.info("Pipeline has finished execution")
 
 #Analysis:
 
-from analysis.feature_engineering import add_features
-from analysis.correlation import correlation_analysis
-from analysis.visualization import (
-    plot_monthly_sales,
-    plot_payment_method_distribution,
-    plot_weekend_vs_weekday_sales,
-    plot_top_items
-)
+# from src.analysis.feature_engineering import add_features
+# from src.analysis.correlation import correlation_analysis
+# from src.analysis.visualization import (
+#     plot_monthly_sales,
+#     plot_payment_method_distribution,
+#     plot_weekend_vs_weekday_sales,
+#     plot_top_items
+# )
 
-# Add features
-feature_df = add_features(deduped_df)
+# # Add features
+# feature_df = add_features(deduped_df)
 
-# Correlation
-corr_matrix = correlation_analysis(feature_df)
+# # Correlation
+# corr_matrix = correlation_analysis(feature_df)
 
-# Visualizations
-plot_monthly_sales(feature_df)
-plot_payment_method_distribution(feature_df)
-plot_weekend_vs_weekday_sales(feature_df)
-plot_top_items(feature_df)
+# # Visualizations
+# plot_monthly_sales(feature_df)
+# plot_payment_method_distribution(feature_df)
+# plot_weekend_vs_weekday_sales(feature_df)
+# plot_top_items(feature_df)

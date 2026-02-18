@@ -31,7 +31,7 @@ def read_source(source_config):
             )
 
         elif source_type == "json":
-            df = pd.read_json(path)
+            df = pd.read_json(path, orient='records')
 
         else:
             raise ValueError(f"Unsupported source type: {source_type}")

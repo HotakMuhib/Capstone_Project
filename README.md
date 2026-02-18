@@ -2,8 +2,9 @@ Current Dependencies:
 pandas
 pyyaml
 sqlalchemy
+psycopg2
 dotenv
-pytest
+pytest-cov
 seaborn
 matplotlib
 
