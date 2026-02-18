@@ -80,15 +80,15 @@ print(deduped_df.head())
 print(rejected_df.info())
 
 # -------------------- LOAD --------------------
-# with get_connection() as conn:
-#     drop_tables(conn)
-#     create_tables(conn)
-#     load_accepted_records(deduped_df, conn)
-#     load_rejected_records(rejected_df, conn)
-#     conn.commit()
-#     rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
-#     for row in rs:
-#         print(row)
+with get_connection() as conn:
+    drop_tables(conn)
+    create_tables(conn)
+    load_accepted_records(deduped_df, conn)
+    load_rejected_records(rejected_df, conn)
+    conn.commit()
+    rs = conn.execute(text("SELECT COUNT(*) FROM transactions"))
+    for row in rs:
+        print(row)
 
 logger.info("Pipeline has finished execution")
 
