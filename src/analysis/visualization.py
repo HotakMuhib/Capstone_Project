@@ -27,7 +27,7 @@ def plot_monthly_sales(df):
 
     plt.figure()
     monthly_sales.plot( marker="o", color="magenta")
-    plt.title("Monthly Sales Trend")
+    plt.title("All-time Sales Trend")
     plt.xlabel("Month")
     plt.ylabel("Total Revenue ($)")
     plt.xticks(rotation=45)

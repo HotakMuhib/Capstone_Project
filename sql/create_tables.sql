@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 -- reason it failed, may add filepath later
 
 CREATE TABLE IF NOT EXISTS rejected_records (
-    --reject_id SERIAL PRIMARY KEY, -- auto incrementing uniq id for each rejected record
+    reject_id SERIAL PRIMARY KEY, -- auto incrementing uniq id for each rejected record
     transaction_id VARCHAR(50),
     cust_id VARCHAR(50),
     category VARCHAR(50),
