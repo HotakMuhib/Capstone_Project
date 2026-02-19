@@ -24,6 +24,7 @@ with get_connection() as conn:
     columns = rs.keys()
     df = pd.DataFrame(rows, columns=columns)
 
+df.info()
 # Feature engineer some useful features in feature_engineer.py
 feature_df = add_features(df)
 
